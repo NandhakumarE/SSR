@@ -1,21 +1,17 @@
-const path = require("path");
+const path = require('path');
 module.exports = {
-  // We're building for Node.js, not for the browser
-  target: 'node',
+  mode: "development",
 
-  mode:'development',
+  entry: "./src/client",
 
-  // Entry point of your SSR application
-  entry: './src/server.js',
-
-  // Output configuration
+  // this bundle should be available to public to serve it static resource.
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'build'), // <-- fixed 'resole' to 'resolve'
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "public"),
   },
 
   // Enable source maps for better debugging
-  devtool: 'source-map',
+  devtool: "source-map",
 
   // Configure how different file types should be handled
   module: {
@@ -35,12 +31,13 @@ module.exports = {
       },
     ],
   },
+
   // Resolve both .js and .jsx so you can import without extensions
   resolve: {
     extensions: [".js", ".jsx"],
   },
 
   stats: {
-    errorDetails: true
-  }
+    errorDetails: true,
+  },
 };

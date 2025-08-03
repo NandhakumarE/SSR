@@ -7,6 +7,7 @@ const Home = () => {
       <p>This is where you can find the latest updates and news.</p>
       <p>Feel free to explore the site and learn more about our offerings.</p>
       <p>Thank you for visiting!</p>
+      <button onClick={() => console.log("hello world")}>Click</button>
     </div>
   );
 };

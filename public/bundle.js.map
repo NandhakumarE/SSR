@@ -1,0 +1,1 @@
+{"version":3,"file":"bundle.js","mappings":";;;;AAAAA,OAAO,CAACC,GAAG,CAAC,aAAa,CAAC,C","sources":["webpack://ssr-new/./src/client/index.js"],"sourcesContent":["console.log(\"sample data\");"],"names":["console","log"],"sourceRoot":""}
