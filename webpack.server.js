@@ -1,9 +1,11 @@
 const path = require("path");
-module.exports = {
+const { default: merge } = require("webpack-merge");
+const common = require("./webpack.common");
+const nodeExternals = require('webpack-node-externals');
+
+module.exports = merge(common, {
   // We're building for Node.js, not for the browser
   target: 'node',
-
-  mode:'development',
 
   // Entry point of your SSR application
   entry: './src/server.js',
@@ -13,34 +15,23 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'), // <-- fixed 'resole' to 'resolve'
   },
+  /*
+  Root Cause: Libraries like Express are already installed on the server in node_modules havinf dynamic import require(some), webpack can't resolve at runtime.
 
-  // Enable source maps for better debugging
-  devtool: 'source-map',
+  Solution: nodeExternals() creates a list of all node_modules in your project and  webpack will skip bundling them.
 
-  // Configure how different file types should be handled
-  module: {
-    rules: [
-      {
-        test: /\.(jsx|js)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: [
-              "@babel/preset-react", // To compile JSX
-              "@babel/preset-env", // To compile modern JS
-            ],
-          },
-        },
-      },
-    ],
-  },
-  // Resolve both .js and .jsx so you can import without extensions
-  resolve: {
-    extensions: [".js", ".jsx"],
-  },
+  Node.js can already require them(node_modules) directly at runtime.
+  
+  because of this, bundle size reduced from 1.5MB to 1.45KB
 
-  stats: {
-    errorDetails: true
-  }
-};
+  script to check
+
+  npx webpack --config webpack.server.js --json > stats.json
+  npx webpack-bundle-analyzer stats.json
+
+  On server bundling, this is perfect because Node.js can require those packages at runtime.
+  On client bundling, browsers cannot load node_modules dynamically using require().
+  */
+  externals:[nodeExternals()]
+});
+
