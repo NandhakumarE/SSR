@@ -1,18 +1,30 @@
-import express from 'express';
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import Home from './client/components/Home';
+import express from "express";
+import React from "react";
+import { renderToString } from "react-dom/server";
+import Home from "./client/components/Home";
 
 const app = express();
 
 const port = 3000;
 
-app.
+app.use(express.static("public"));
 
-app.get('/', (req, res) => {
-  const content = renderToString(<Home/>)
+app.get("/", (_req, res) => {
+  const content = renderToString(<Home />);
 
-  res.send(content);
+  const html = `
+    <!DOCTYPE HTML>
+    <html> 
+      <head>
+        <title>Home</title>
+      </head>
+      <body>
+        <div id="root">${content}</div>
+        <script src="bundle.js"></script>
+      </body>
+    </html>
+  `;
+  res.status(200).send(html);
 });
 
 app.listen(port, () => {
