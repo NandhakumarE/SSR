@@ -1,12 +1,18 @@
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router";
-import router from "../router";
+import Router from "../router";
+import { Provider } from "react-redux";
+import store from "../store";
 
 export default (req) => {
   const { url } = req;
   const content = renderToString(
-    <StaticRouter location={url}>{router()}</StaticRouter>
+    <Provider store={store}>
+      <StaticRouter location={url}>
+        <Router/>
+      </StaticRouter>
+    </Provider>
   );
 
   return `

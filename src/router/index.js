@@ -1,12 +1,13 @@
 import React from "react";
-import { Route, Routes } from "react-router";
+import { Route, Routes, useRoutes } from "react-router";
 import Home from "../client/components/Home";
+import Users from "../client/components/Users";
 
-export default () => {
-  return (
-    <Routes>
-      <Route index path="/" element={<Home />} />
-      <Route path="/about" element={(<div>About</div>)} />
-    </Routes>
-  );
-};
+export const routes = [
+  { path: "/", element: <Home />, index: true },
+  { path: "/users", element: <Users />, loadData: Users.fetchUsers },
+];
+
+const Router = () => useRoutes(routes);
+
+export default Router;
