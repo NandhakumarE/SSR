@@ -1,8 +1,9 @@
 import React from "react";
+import { Provider } from "react-redux";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router";
 import Router from "../router";
-import { Provider } from "react-redux";
+import serialize from "serialize-javascript";
 
 export default (req, store) => {
   const { url } = req;
@@ -23,7 +24,7 @@ export default (req, store) => {
       <body>
         <div id="root">${content}</div>
         <script>
-          window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())}
+          window.__PRELOADED_STATE__ = ${serialize(store.getState(), { isJSON: true })}
         </script>
         <script src="bundle.js"></script>
       </body>

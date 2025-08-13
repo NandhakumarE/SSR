@@ -7,7 +7,13 @@ const Users = () => {
   const dispatch = useDispatch();
 
   const { users = [] } = useSelector((reducers) => reducers.user);
-  useEffect(() => { dispatch(fetchUsers()) }, [dispatch]);
+
+ useEffect(() => {
+    if (!users.length) {
+      dispatch(fetchUsers());
+    }
+  }, [dispatch, users.length]);
+
   return (
     <section>
       <h2>List of users</h2>

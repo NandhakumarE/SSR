@@ -5,8 +5,9 @@ export const reducers = {
   user: userReducer,
 };
 
-export default function createStore() {
+export default function createStore(preloadedState) {
   return configureStore({
     reducer: reducers,
+    preloadedState:preloadedState
   });
 }
