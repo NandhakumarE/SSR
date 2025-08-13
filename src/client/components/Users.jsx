@@ -2,14 +2,12 @@ import React from 'react';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../../slice/userSlice";
-import store from '../../store';
 
 const Users = () => {
   const dispatch = useDispatch();
 
   const { users = [] } = useSelector((reducers) => reducers.user);
-
-  useEffect(() => { dispatch(fetchUsers()) }, []);
+  useEffect(() => { dispatch(fetchUsers()) }, [dispatch]);
   return (
     <section>
       <h2>List of users</h2>
@@ -22,6 +20,7 @@ const Users = () => {
   );
 };
 
-Users.fetchUsers = () => store.dispatch(fetchUsers());
+// For SSR
+Users.loadData = (store) => store.dispatch(fetchUsers());
 
 export default Users;

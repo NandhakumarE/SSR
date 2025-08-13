@@ -5,7 +5,7 @@ import Users from "../client/components/Users";
 
 export const routes = [
   { path: "/", element: <Home />, index: true },
-  { path: "/users", element: <Users />, loadData: Users.fetchUsers },
+  { path: "/users", element: <Users />, loadData: Users.loadData },
 ];
 
 const Router = () => useRoutes(routes);

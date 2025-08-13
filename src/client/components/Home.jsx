@@ -1,14 +1,6 @@
 import React from 'react'
-import store from '../../store';
-import { fetchUsers } from '../../slice/userSlice';
 const Home = () => {
-
-  const onClick = () => {
-     store.dispatch(fetchUsers(1,2,3,4)).then((...rest) => {
-        console.log('restrest',store.getState())
-     });
-     console.log("hello world")
-  };
+  const onClick = () => { console.log("hello world") };
 
   return (
     <div>

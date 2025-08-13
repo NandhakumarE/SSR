@@ -10,7 +10,9 @@ const initialState = {
 export const fetchUsers = createAsyncThunk("fetch/users", () => {
   return axios
     .get("https://jsonplaceholder.typicode.com/users")
-    .then((untrusted_data) =>  untrusted_data.data);
+    .then((untrusted_data) => {
+       return untrusted_data.data
+      });
 });
 
 const userSlice = createSlice({
@@ -22,7 +24,6 @@ const userSlice = createSlice({
     });
     builder.addCase(fetchUsers.fulfilled, (state, action) => {
       state.isLoading = false;
-      console.log('sdjkbfskjd', action);
       state.users = action.payload;
     });
     builder.addCase(fetchUsers.rejected, (state, action) => {
