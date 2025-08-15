@@ -4,6 +4,7 @@ import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router";
 import Router from "../router";
 import serialize from "serialize-javascript";
+import '../index.css'
 
 export default (req, store) => {
   const { url } = req;
