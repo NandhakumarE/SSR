@@ -4,7 +4,6 @@ import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router";
 import Router from "../router";
 import serialize from "serialize-javascript";
-import '../index.css'
 
 export default (req, store) => {
   const { url } = req;
@@ -21,6 +20,7 @@ export default (req, store) => {
     <html> 
       <head>
         <title>Home</title>
+        <link rel="stylesheet" href="/styles.css">
       </head>
       <body>
         <div id="root">${content}</div>

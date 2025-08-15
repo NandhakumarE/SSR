@@ -20,18 +20,8 @@ module.exports = {
           },
         },
       },
-      {
-        test: /\.css$/,
-        exclude:/node_modules/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader'
-        ]
-      }
     ],
   },
-
   // Resolve both .js and .jsx so you can import without extensions
   resolve: {
     extensions: [".js", ".jsx"],

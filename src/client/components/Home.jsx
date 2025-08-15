@@ -1,11 +1,9 @@
 import React from 'react'
-import { useNavigate } from 'react-router';
 const Home = () => {
-  const navigate = useNavigate();
   const buttonStyle = 'px-4 py-2 rounded-md w-fit cursor-pointer text-white';
 
   const handleEmptyClick = () => { console.log("hello world") };
-  const moveToUserList = () => navigate('/users');
+  const moveToUserList = () => { window.location.href = '/users'; }
 
   return (
     <div className='p-4 flex flex-col gap-4 '>
